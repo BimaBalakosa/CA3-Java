@@ -1,0 +1,8 @@
+Customer ID: 2000
+Customer name: A
+Customer contact number: 456
+Customer Address: def
+Customer ID: 2000
+Customer name: B
+Customer contact number: 123
+Customer Address: abc
