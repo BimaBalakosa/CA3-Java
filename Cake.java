@@ -7,7 +7,7 @@ public class Cake {
       int cake = input.nextInt();
       switch (cake) {
         case 1:
-        System.out.println();
+        System.out.println("wiwj");
         break;
         case 2:
         System.out.println();
