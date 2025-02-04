@@ -1,10 +1,16 @@
 import java.util.Scanner;
+
 public class project{
   public static void main (String[] args){
-    Cake menu1 = new Cake();
-    
-    Order menu3 = new Order();
-    Report menu4 = new Report();
+    String[][] customer = new String[0][];
+    String[][] cake = new String[0][];
+    String [][] order = new String[0][];
+    Cake choco = new Cake(1001, "Chocolate", 30.4);
+    Cake straw = new Cake(1002, "Strawberry", 25.1);
+    Customer guest1 = new Customer(101, "Jerry", "Bukit Panjang", 999);
+    Customer guest2 = new Customer(102, "Yin Xuan", "Malay", 991);
+    Order order1 = new Order(04, 02, 2025, 1, 1001);
+    Order order2 = new Order(05, 03, 2025, 2, 1002);
     Scanner input = new Scanner(System.in); 
     while (true) {
       System.out.print("***Main Menu***\n1. Manage Cakes\n2. Manage Customers\n3. Manage Orders\n4. Generate Report\n0. Exit\n"); 
@@ -13,27 +19,19 @@ public class project{
       switch (option) {
       case 0:
         input.close();
-        System.out.println("You have exited");
+        System.out.println("Thank you for using the Cake Ordering System.");
         return;
       case 1:
-        System.out.println("\n***Cake Menu***\n1. Create Cake\n2. Update Cake\n3. Delete Cake\n4. View all Cakes\n5. Back to the Main Menu\n");
-        System.out.print("Enter option: ");
-        
-        menu1.CakeMenu(input);
+        cake = Cake.CakeMenu(input, cake);
         break;
       case 2:
-        System.out.println("\n***Customer Menu***\n1. Add Customer\n2. Edit Customer\n3. Remove Customer\n4. View all Customers\n5. Back to the Main menu\n");
-        System.out.print("Enter option: ");
+        customer = Customer.CustomerMenu(input, customer);
         break;
       case 3:
-        System.out.println("\n***Order Menu***\n1. Make an Order\n2. Cancel an Order\n3. View all Orders\n4. Back to the Main menu\n");
-        System.out.print("Enter option: ");
-        menu3.OrderCustomer(input);  
+        order = Order.OrderCustomer(input, order);        
         break;
       case 4:
-        System.out.println("\n***Report Menu***\n1. Generate Orders report by Date \n2. Generate Orders report by Cake\n3. Generate Orders report by Customer\n4. Generate total number of Orders \n5. Back to the Main menu\n");
-        System.out.print("Enter option: ");
-        menu4.GenerateReport(input);
+        Report.GenerateReport(input, cake, order, customer);
         break;
       default:
         System.out.println("Invalid input");
