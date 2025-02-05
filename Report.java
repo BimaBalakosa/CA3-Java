@@ -11,13 +11,19 @@ public class Report {
           System.out.print("Enter date (dd/mm/yyyy): ");
           input.nextLine();
           String date = input.nextLine();
+          if (Order.isValidDate(date) == false){
+            System.out.println("Error: Invalid date input");
+            break;
+          }
           for (int i = 0; i<order.length; i++){
             if (order[i][1].equals(date)){
               System.out.println("Order ID: "+order[i][0]);
               System.out.println("Cake Code: "+order[i][2]);
               System.out.println("Customer ID: "+order[i][3]);
+              break;
             }
           }
+          System.out.println("No date found");
           break;
         case 2:
           System.out.print("Enter Cake code: ");
@@ -27,10 +33,12 @@ public class Report {
               System.out.println("Order ID: "+order[i][0]);
               System.out.println("Date: "+order[i][1]);
               System.out.println("Customer ID: "+order[i][3]);
+              break;
             }
           }
+          System.out.println("No Cake Code found");
           break;
-          case 3:
+        case 3:
           System.out.print("Enter Customer ID: ");
           int customerID = input.nextInt();
           input.nextLine();
@@ -39,10 +47,15 @@ public class Report {
               System.out.println("Order ID: "+order[i][0]);
               System.out.println("Date: "+order[i][1]);
               System.out.println("Cake Code: "+order[i][2]);
+              break;
             }
           }
+          System.out.println("No Customer ID found");
           break;
         case 4:
+          if (order.length == 0){
+            System.out.println("No order at the moment");
+          }
           System.out.printf("Total number of Orders: %d", order.length);
           break;
         case 5:
