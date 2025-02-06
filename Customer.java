@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 public class Customer {
   private int customerID;
   private String customerName;
@@ -42,6 +42,7 @@ public class Customer {
       int option = input.nextInt();
       switch (option) {
       case 1:
+      try{
         System.out.print("Enter Customer ID: ");
         int customerID = input.nextInt();
         if (checkIDExistence(customer, customerID)){
@@ -64,13 +65,16 @@ public class Customer {
           customer = newGuest;
           System.out.println("Customer Added Successfully");
         }
+      } catch (InputMismatchException e){
+        System.out.println("Error: Invalid inputs!");
+      }
         break;
       case 2:
+      try{
         System.out.print("Enter Customer's ID to edit: ");
         int editID = input.nextInt();
-        System.out.println();
         if (checkIDExistence(customer, editID) == false  ){
-          System.out.println("Error: No ID found");
+          System.err.println("Error: No ID found");
         }
         else {
           for (int i = 0; i<customer.length; i++){
@@ -94,8 +98,12 @@ public class Customer {
             }
           }
         }
+      } catch (InputMismatchException e){
+        System.out.println("Error: Invalid inputs!");
+      }
           break;
       case 3:
+      try{
         System.out.println("Enter Customer's ID to remove: ");
         int removeID = input.nextInt();
         if (checkIDExistence(customer, removeID)) {
@@ -111,6 +119,9 @@ public class Customer {
       } else {
           System.out.println("Error: No ID found.");
       }        
+    } catch (InputMismatchException e){
+      System.out.println("Error: Invalid inputs!");
+    }
         break;
       case 4:
         if (customer.length == 0) {
