@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 public class Cake {
   private int cakeCode;
   private String cakeName;
@@ -33,8 +33,9 @@ public class Cake {
       System.out.print("Enter option: ");
       int option = input.nextInt();
       switch (option) {
-        case 1: 
-          System.out.print("\nEnter Cake's Name:");
+        case 1:
+        try{
+          System.out.print("\nEnter Cake's Name: ");
           String newCakeName = input.nextLine();
           input.nextLine();
           System.out.print("\nEnter Cake Code: ");
@@ -43,13 +44,16 @@ public class Cake {
           System.out.print("\nEnter Cake Price: ");
           double newCakePrice = input.nextDouble();  
           input.nextLine(); 
-          
           String[][] newCake = new String[cake.length+1][];
           System.arraycopy(cake,0,newCake,0, cake.length);
           newCake [cake.length] = new String[]{String.valueOf(newCakeCode), newCakeName, String.valueOf(newCakePrice)};
           cake = newCake;
+        } catch (InputMismatchException e){
+          System.out.println("Error: Invalid inputs!");
+        }
           break;
         case 2:
+        try{
           System.out.print("Enter Cake Code to update: ");
           int updateCakeCode = input.nextInt();
           if (checkCakeIDExistence(cake, updateCakeCode) == false){
@@ -74,8 +78,12 @@ public class Cake {
               }
             } 
           }
+        } catch (InputMismatchException e){
+            System.out.println("Error: Invalid inputs!");
+        }
           break;
         case 3:
+        try{
           System.out.println("Enter Cake Code to delete: ");
           int deleteCakeCode = input.nextInt();
           input.nextLine();
@@ -92,6 +100,9 @@ public class Cake {
           } else {
             System.out.println("Error: No cake code found");
           }
+        } catch (InputMismatchException e){
+          System.out.println("Error: Invalid inputs!");
+        }
           break;
         case 4:
           if (cake.length == 0){
