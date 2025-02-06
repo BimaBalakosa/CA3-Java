@@ -7,7 +7,7 @@ public class project{
     String [][] order = new String[2][];
     Cake choco = new Cake(1001, "Chocolate", 30.4);
     Cake straw = new Cake(1002, "Strawberry", 25.1);
-    Customer guest1 = new Customer(101, "Jerry", "Bukit Panjang", 999);
+    Customer guest1 = new Customer(101, "Jerry", "VietNam", 999);
     Customer guest2 = new Customer(102, "Yin Xuan", "Malay", 991);
     Order order1 = new Order(04, 02, 2025, 1, 1001);
     Order order2 = new Order(05, 03, 2025, 2, 1002);
