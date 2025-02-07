@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 public class Cake {
   private int cakeCode;
   private String cakeName;
@@ -33,50 +33,62 @@ public class Cake {
       System.out.print("Enter option: ");
       int option = input.nextInt();
       switch (option) {
-        case 1: 
-          System.out.print("\nEnter Cake's Name:");
-          String newCakeName = input.nextLine();
+        case 1:
+        try{
+          System.out.print("\nEnter Cake's Name: ");
           input.nextLine();
+          String newCakeName = input.nextLine();
           System.out.print("\nEnter Cake Code: ");
           int newCakeCode = input.nextInt();  
           input.nextLine();  
           System.out.print("\nEnter Cake Price: ");
           double newCakePrice = input.nextDouble();  
           input.nextLine(); 
-          
           String[][] newCake = new String[cake.length+1][];
           System.arraycopy(cake,0,newCake,0, cake.length);
           newCake [cake.length] = new String[]{String.valueOf(newCakeCode), newCakeName, String.valueOf(newCakePrice)};
           cake = newCake;
+        } catch (InputMismatchException e){
+          System.out.println("Error: Invalid inputs!");
+        }
           break;
         case 2:
+        try{
           System.out.print("Enter Cake Code to update: ");
           int updateCakeCode = input.nextInt();
+          System.out.println();
           if (checkCakeIDExistence(cake, updateCakeCode) == false){
-            System.out.print("\nError: No cake code found");
+            System.out.println("\nError: No cake code found");
             break;
           }
           else{
+            System.out.print("\nEnter new Cake Code: ");
+            int updateCode = input.nextInt();
+            input.nextLine();
+            if (checkCakeIDExistence(cake, updateCode)){
+              System.out.println("\nCake code already exists");
+              break;
+            }
             for (int i = 0; i<cake.length; i++){
-              if (Integer.parseInt(cake[i][0]) == updateCakeCode){
-                System.out.println("Error: Cake Code already exists");
-              }
-              else{
-                System.out.print("Enter new Cake Code: ");
-                int updateCode = input.nextInt();
-                input.nextLine();
+              if (cake[i][0].equals(String.valueOf(updateCakeCode))){
                 System.out.print("\nUpdate Cake name: ");
                 String updateName = input.nextLine();
                 System.out.print("\nUpdate Cake price: ");
                 double updatePrice = input.nextDouble();
                 input.nextLine();
                 cake [i] = new String[]{String.valueOf(updateCode), updateName, String.valueOf(updatePrice)};
+                break;
               }
-            } 
+            }
           }
+        }
+        catch (InputMismatchException e){
+            System.out.println("Error: Invalid inputs!");
+        }
           break;
         case 3:
-          System.out.println("Enter Cake Code to delete: ");
+        try{
+          System.out.print("\nEnter Cake Code to delete: ");
           int deleteCakeCode = input.nextInt();
           input.nextLine();
           if (checkCakeIDExistence(cake, deleteCakeCode)) {
@@ -88,27 +100,30 @@ public class Cake {
               }
             }
             cake = newCakeArray;
-            System.out.printf("Cake %d is removed", deleteCakeCode);
+            System.out.printf("%nCake %d is removed%n", deleteCakeCode);
           } else {
-            System.out.println("Error: No cake code found");
+            System.out.println("\nError: No cake code found");
           }
+        } catch (InputMismatchException e){
+          System.out.println("Error: Invalid inputs!");
+        }
           break;
         case 4:
           if (cake.length == 0){
             System.out.println("Out of Cake");
           }
           else{         
-            System.out.println("All Cakes: ");
+            System.out.println("\nAll Cakes: ");
             for (int i = 0; i < cake.length; i++) {
               System.out.println("Cake Code: " + cake[i][0] + ", Name: " + cake[i][1] + ", Price: " + cake[i][2]);
             }
           }
           break;
         case 5:
-          System.out.println("Returning to the main menu.");
+          System.out.println("\nReturning to the main menu.\n");
           return cake;
         default:
-          System.out.println("Invalid option");
+          System.out.println("\nInvalid option");
           break;
       }
     }
@@ -122,4 +137,3 @@ public class Cake {
     return false;
   }
 }
-
