@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 public class Customer {
   private int customerID;
   private String customerName;
@@ -42,19 +42,19 @@ public class Customer {
       int option = input.nextInt();
       switch (option) {
       case 1:
-        System.out.print("Enter Customer ID: ");
+      try{
+        System.out.print("\nEnter Customer ID: ");
         int customerID = input.nextInt();
         if (checkIDExistence(customer, customerID)){
-          System.out.println("Error: ID already existed.");
+          System.out.println("\nError: Customer ID already exists.");
           break;
         }
         else{
           System.out.print("\nEnter Customer full name: ");
-          String customerName = input.nextLine();
           input.nextLine();
+          String customerName = input.nextLine();
           System.out.print("\nEnter Customer Address: ");
           String customerAddress = input.nextLine();
-          input.nextLine();
           System.out.print("\nEnter Customer contact number: ");
           int customerContact = input.nextInt();
           input.nextLine();
@@ -62,41 +62,50 @@ public class Customer {
           System.arraycopy(customer, 0, newGuest, 0, customer.length);
           newGuest[customer.length] = new String[]{String.valueOf(customerID), customerName, String.valueOf(customerContact), customerAddress};
           customer = newGuest;
-          System.out.println("Customer Added Successfully");
+          System.out.println("\nCustomer Added Successfully");
         }
+      } catch (InputMismatchException e){
+        System.out.println("Error: Invalid inputs!");
+      }
         break;
       case 2:
-        System.out.print("Enter Customer's ID to edit: ");
+      try{
+        System.out.print("\nEnter Customer's ID to edit: ");
         int editID = input.nextInt();
-        System.out.println();
         if (checkIDExistence(customer, editID) == false  ){
-          System.out.println("Error: No ID found");
+          System.err.println("\nError: No Customer ID found");
         }
         else {
           for (int i = 0; i<customer.length; i++){
             if (Integer.parseInt(customer[i][0]) == editID){
-              System.out.println("Enter Customer's new ID: ");
+              System.out.print("\nEnter Customer's new ID: ");
               int newID = input.nextInt();
               input.nextLine();
-              if (checkIDExistence(customer, newID) && newID != editID) {
-                System.out.println("Error: New ID already exists.");
+              if (checkIDExistence(customer, newID)) {
+                System.out.print("\nError: New Customer ID already exists.\n");
+                break;
               }
               else{
-                System.out.println("Enter Customer's full name to edit: ");
+                System.out.print("\nEnter Customer's new full name: ");
                 String editName = input.nextLine();
-                System.out.println("Enter Customer's contact number to edit: ");
+                System.out.print("\nEnter Customer's new contact number: ");
                 int editContact = input.nextInt();
                 input.nextLine();
-                System.out.println("Enter Customer's Address to edit: ");
+                System.out.print("\nEnter Customer's new Address: ");
                 String editAddress = input.nextLine();
+                System.out.println("\nCustomer edited successfully");
                 customer[i] = new String[]{String.valueOf(newID), editName, String.valueOf(editContact), editAddress};
               }
             }
           }
         }
+      } catch (InputMismatchException e){
+        System.out.println("Error: Invalid inputs!");
+      }
           break;
       case 3:
-        System.out.println("Enter Customer's ID to remove: ");
+      try{
+        System.out.print("\nEnter Customer's ID to remove: ");
         int removeID = input.nextInt();
         if (checkIDExistence(customer, removeID)) {
           String[][] newCustomerArray = new String[customer.length - 1][];
@@ -109,8 +118,11 @@ public class Customer {
           customer = newCustomerArray;
           System.out.println("Customer removed successfully.");
       } else {
-          System.out.println("Error: No ID found.");
+          System.out.println("\nError: No ID found.");
       }        
+    } catch (InputMismatchException e){
+      System.out.println("Error: Invalid inputs!");
+    }
         break;
       case 4:
         if (customer.length == 0) {
@@ -128,7 +140,7 @@ public class Customer {
       }
       break;
       case 5:
-        System.out.println("Returning to the main menu.");
+        System.out.println("\nReturning to the main menu.");
         return customer;
       default:
         System.out.println("Invalid option");
