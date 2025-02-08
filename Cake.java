@@ -32,16 +32,16 @@ public class Cake {
       System.out.println("\n***Cake Menu***\n1. Create Cake\n2. Update Cake\n3. Delete Cake\n4. View all Cakes\n5. Back to the Main Menu\n");
       System.out.print("Enter option: ");
       int option = input.nextInt();
+      input.nextLine();
       switch (option) {
         case 1:
         try{
           System.out.print("\nEnter Cake's Name: ");
-          input.nextLine();
           String newCakeName = input.nextLine();
-          System.out.print("\nEnter Cake Code: ");
+          System.out.print("\nEnter Cake's Code: ");
           int newCakeCode = input.nextInt();  
           input.nextLine();  
-          System.out.print("\nEnter Cake Price: ");
+          System.out.print("\nEnter Cake's Price: ");
           double newCakePrice = input.nextDouble();  
           input.nextLine(); 
           String[][] newCake = new String[cake.length+1][];
@@ -54,7 +54,7 @@ public class Cake {
           break;
         case 2:
         try{
-          System.out.print("Enter Cake Code to update: ");
+          System.out.print("\nEnter Cake Code to update: ");
           int updateCakeCode = input.nextInt();
           System.out.println();
           if (checkCakeIDExistence(cake, updateCakeCode) == false){
@@ -62,7 +62,7 @@ public class Cake {
             break;
           }
           else{
-            System.out.print("\nEnter new Cake Code: ");
+            System.out.print("Enter new Cake Code: ");
             int updateCode = input.nextInt();
             input.nextLine();
             if (checkCakeIDExistence(cake, updateCode)){
@@ -77,6 +77,7 @@ public class Cake {
                 double updatePrice = input.nextDouble();
                 input.nextLine();
                 cake [i] = new String[]{String.valueOf(updateCode), updateName, String.valueOf(updatePrice)};
+                System.out.println("\nCake updated successfully");
                 break;
               }
             }
