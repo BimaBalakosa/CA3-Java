@@ -7,24 +7,26 @@ public class Report {
       System.out.println("\n***Report Menu***\n1. Generate Orders report by Date \n2. Generate Orders report by Cake\n3. Generate Orders report by Customer\n4. Generate total number of Orders \n5. Back to the Main menu\n");
       System.out.print("Enter option: ");
       int option = input.nextInt();
+      input.nextLine();
       switch (option) {
         case 1:
         try{
           boolean found = false;
           System.out.print("\nEnter date (dd/mm/yyyy): ");
-          input.nextLine();
           String date = input.nextLine();
           if (Order.isValidDate(date) == false){
-            System.out.println("Error: Invalid date input");
+            System.out.println("\nError: Invalid date input");
             break;
           }
           for (int i = 0; i<order.length; i++){
             if (order[i][1].equals(date)){
-              System.out.println("Order ID: "+order[i][0]);
-              System.out.println("Cake Code: "+order[i][2]);
-              System.out.println("Customer ID: "+order[i][3]);
+              System.out.printf("%n%7s Report Form %n","");
+              System.out.printf("-----------------------------%n");
+              System.out.printf("|%-13s : %-10s |%n"," Order ID ", order[i][0]);
+              System.out.printf("|%-13s : %-10s |%n"," Cake Code ", order[i][2]);
+              System.out.printf("|%-13s: %-10s |%n"," Customer ID: ", order[i][3]);
+              System.out.printf("-----------------------------%n");
               found = true;
-              break;
             }
           }
           if (!found){
@@ -46,11 +48,13 @@ public class Report {
           }
           for (int i = 0; i<order.length; i++){
             if (order[i][0].equals(String.valueOf(cakeCode)) ){
-              System.out.println("Order ID: "+order[i][2]);
-              System.out.println("Date: "+order[i][1]);
-              System.out.println("Customer ID: "+order[i][3]);
+              System.out.printf("%n%7s Report Form %n","");
+              System.out.printf("-----------------------------%n");
+              System.out.printf("|%-13s : %-10s |%n"," Order ID ", order[i][2]);
+              System.out.printf("|%-13s : %-10s |%n", " Date ", order[i][1]);
+              System.out.printf("|%-13s: %-10s |%n"," Customer ID: ", order[i][3]);
+              System.out.printf("-----------------------------%n");
               found1 = true;
-              break;
             }
           }
           if (!found1){
@@ -73,11 +77,13 @@ public class Report {
           }
           for (int i = 0; i<order.length; i++){
             if (order[i][3].equals(String.valueOf(customerID))){
-              System.out.println("Order ID: "+order[i][2]);
-              System.out.println("Date: "+order[i][1]);
-              System.out.println("Cake Code: "+order[i][0]);
+              System.out.printf("%n%7s Report Form %n","");
+              System.out.printf("-----------------------------%n");
+              System.out.printf("|%-15s: %s%10s%n","  Order ID ", order[i][2],"|");
+              System.out.printf("|%-15s: %10s|%n","  Date ", order[i][1]);
+              System.out.printf("|%-15s: %4s%7s%n","  Cake Code ", order[i][0],"|");
+              System.out.printf("-----------------------------%n");
               found2 = true;
-              break;
             }
           }
           if (!found2){
@@ -89,12 +95,12 @@ public class Report {
           break;
         case 4:
           if (order.length == 0){
-            System.out.println("\nNo order at the moment");
+            System.out.println("\nNo order at the moment\n");
           }
           System.out.printf("%nTotal number of Orders: %d%n", order.length);
           break;
         case 5:
-          System.out.println("\nReturning to the main menu.");
+          System.out.println("\nReturning to the main menu.\n");
           return null;
         default:
           System.out.println("\nError: Invalid option");
