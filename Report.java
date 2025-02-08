@@ -24,7 +24,7 @@ public class Report {
               System.out.println("Cake Code: "+order[i][2]);
               System.out.println("Customer ID: "+order[i][3]);
               found = true;
-              break;
+              System.out.println();
             }
           }
           if (!found){
@@ -50,7 +50,7 @@ public class Report {
               System.out.println("Date: "+order[i][1]);
               System.out.println("Customer ID: "+order[i][3]);
               found1 = true;
-              break;
+              System.out.println();
             }
           }
           if (!found1){
@@ -77,7 +77,7 @@ public class Report {
               System.out.println("Date: "+order[i][1]);
               System.out.println("Cake Code: "+order[i][0]);
               found2 = true;
-              break;
+              System.out.println();
             }
           }
           if (!found2){
