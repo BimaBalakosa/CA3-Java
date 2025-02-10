@@ -40,6 +40,7 @@ public class Customer {
       System.out.println("\n***Customer Menu***\n1. Add Customer\n2. Edit Customer\n3. Remove Customer\n4. View all Customers\n5. Back to the Main menu\n");
       System.out.print("Enter option: ");
       int option = input.nextInt();
+      input.nextLine();
       switch (option) {
       case 1:
       try{
@@ -116,7 +117,7 @@ public class Customer {
               }
           }
           customer = newCustomerArray;
-          System.out.println("Customer removed successfully.");
+          System.out.println("\nCustomer removed successfully.");
       } else {
           System.out.println("\nError: No ID found.");
       }        
@@ -141,9 +142,11 @@ public class Customer {
       break;
       case 5:
         System.out.println("\nReturning to the main menu.");
+        System.out.println();
         return customer;
       default:
         System.out.println("Invalid option");
+        System.out.println();
         break;
       }
     }
