@@ -64,39 +64,39 @@ public class Order {
     System.out.println("\n***Order Menu***\n1. Make an Order\n2. Cancel an Order\n3. View all Orders\n4. Back to the Main menu\n");
     System.out.print("Enter option: ");
     int option = input.nextInt();
+    input.nextLine();
     switch (option) {
       case 1:
       try {
-        System.out.print("Enter Order date (dd//mm/yyyy): ");
-        input.nextLine();
+        System.out.print("\nEnter Order date (dd//mm/yyyy): ");
         String date = input.nextLine();
         if (isValidDate(date) == false){
           System.out.println("Error: Invalid date");
           break;
         }
         if (checkOrderLogic(order, date) == cake.length){
-          System.out.println("No more Cake");
+          System.out.println("\nNo more Cake");
           break;
         }
         System.out.print("\nEnter Customer's ID: ");
         int customerID = input.nextInt();
         input.nextLine();
         if (Customer.checkIDExistence(customer, customerID) == false){
-          System.out.println("Error: No Customer ID found");
+          System.out.println("\nError: No Customer ID found");
           break;
         }
         System.out.print("\nEnter Cake's ID: ");
         int cakeOrderID = input.nextInt();
         input.nextLine();
         if (Cake.checkCakeIDExistence(cake, cakeOrderID) == false){
-          System.out.println("Error: No Cake ID found");
+          System.out.println("\nError: No Cake ID found");
           break;
         }
         System.out.print("\nEnter Order ID: ");
         int newOrderID = input.nextInt();
         input.nextLine();
         if (checkOrderExistence(order, newOrderID)){
-          System.out.println("Error: Order ID already existed");
+          System.out.println("\nError: Order ID already existed");
           break;
         }
         else{
@@ -105,6 +105,7 @@ public class Order {
           newOrder [order.length] = new String[]{String.valueOf(cakeOrderID), date, String.valueOf(newOrderID), String.valueOf(customerID)};
           order = newOrder;
           System.out.print("\nCake"+" "+ cakeOrderID+" "+"ordered on"+" "+date+""+", Order ID is"+" "+newOrderID);
+          System.out.println();
         }
       } catch (InputMismatchException e){
           System.out.println("Error: Invalid inputs!");
@@ -118,9 +119,9 @@ public class Order {
           String[][] newOrderArray = new String[order.length-1][];
           int index = 0;
           for (int i = 0; i < order.length; i++) {
-              if (Integer.parseInt(order[i][2]) != oID) {
-                  newOrderArray[index++] = order[i];
-              }
+            if (Integer.parseInt(order[i][2]) != oID) {
+              newOrderArray[index++] = order[i];
+            }
           }
           order = newOrderArray;
           System.out.printf("%nOrder ID %d is cancelled%n", oID);
